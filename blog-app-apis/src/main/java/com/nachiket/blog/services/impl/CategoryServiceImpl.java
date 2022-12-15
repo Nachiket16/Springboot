@@ -53,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> getCategory() {
+    public List<CategoryDto> getAllCategory() {
         List<Category> categories = this.categoryRepo.findAll();
         List<CategoryDto> catDto = categories.stream()
                 .map((cat) -> this.modelMapper.map(cat, CategoryDto.class))

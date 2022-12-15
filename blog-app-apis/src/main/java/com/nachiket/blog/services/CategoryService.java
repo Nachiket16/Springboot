@@ -13,6 +13,6 @@ public interface CategoryService {
 
     CategoryDto getCategory(Integer categoryId);
 
-    List<CategoryDto> getCategory();
+    List<CategoryDto> getAllCategory();
 
 }
