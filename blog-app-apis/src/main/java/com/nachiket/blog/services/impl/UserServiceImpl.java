@@ -1,6 +1,7 @@
 package com.nachiket.blog.services.impl;
 
 import com.nachiket.blog.entities.User;
+import com.nachiket.blog.exception.ResourceNotFoundException;
 import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.repositories.UserRepo;
 import com.nachiket.blog.services.UserService;
@@ -21,7 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(UserDto user, Integer userId) {
+    public UserDto updateUser(UserDto userDto, Integer userId) {
+        User user = this.userRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User", " Id ",userId));
 
         return null;
     }
