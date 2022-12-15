@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +22,14 @@ public class UserController {
 
     //Post - For creation
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
         UserDto createUserDto = this.userService.createUser(userDto);
         return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
     }
 
     //Put - Update
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable("userId") Integer userId){
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer userId){
         UserDto updatedUser = this.userService.updateUser(userDto, userId);
         return ResponseEntity.ok(updatedUser);
     }
@@ -36,7 +37,7 @@ public class UserController {
     //Delete -
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uid){
+    public ResponseEntity<ApiResponse> deleteUser(@Valid @PathVariable("userId") Integer uid){
         this.userService.deleteUser(uid);
         return new ResponseEntity<ApiResponse>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
     }
@@ -50,7 +51,7 @@ public class UserController {
 
     //GET - User
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getSingleUser(@PathVariable("userId") Integer userId){
+    public ResponseEntity<UserDto> getSingleUser(@Valid @PathVariable("userId") Integer userId){
         return  ResponseEntity.ok(this.userService.getUserById(userId));
     }
 }
