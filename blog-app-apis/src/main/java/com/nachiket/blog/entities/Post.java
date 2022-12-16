@@ -25,6 +25,7 @@ public class Post {
 
     //Many Post have one category
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     //Many Post can be written by a one user
