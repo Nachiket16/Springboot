@@ -1,6 +1,8 @@
 package com.nachiket.blog.controllers;
 
+import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.CategoryDto;
+import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,16 +34,16 @@ public class CategoryController {
         return ResponseEntity.ok(this.categoryService.getCategory(courseId));
     }
 
-    @PostMapping("/{courseID}")
-    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto ,@PathVariable("courseId") Integer courseID){
+    @PutMapping("/{courseID}")
+    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto ,@PathVariable("courseID") Integer courseID){
         CategoryDto catDto = this.categoryService.updateCategory(categoryDto,courseID);
         return ResponseEntity.ok(catDto);
     }
 
     @DeleteMapping("/{courseId}")
-    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable Integer courseID){
+    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable("courseId") Integer courseID){
         this.categoryService.deleteCategory(courseID);
-        return new ResponseEntity<>(new ApiResponse("Category Has Beed Deleted Successfully", true),HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(new ApiResponse("Category Has Been Deleted Successfully", true),HttpStatus.OK);
     }
 
 }
