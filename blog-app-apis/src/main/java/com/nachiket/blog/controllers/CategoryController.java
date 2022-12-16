@@ -24,8 +24,24 @@ public class CategoryController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoryDto>> getCategory(){
+    public ResponseEntity<List<CategoryDto>> getAllCategory(){
         return new ResponseEntity<>(this.categoryService.getAllCategory(), HttpStatus.OK);
+    }
+    @GetMapping("/{courseId}")
+    public ResponseEntity<CategoryDto> getCategory(@Valid @PathVariable("courseId") Integer courseId){
+        return ResponseEntity.ok(this.categoryService.getCategory(courseId));
+    }
+
+    @PostMapping("/{courseID}")
+    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto ,@PathVariable("courseId") Integer courseID){
+        CategoryDto catDto = this.categoryService.updateCategory(categoryDto,courseID);
+        return ResponseEntity.ok(catDto);
+    }
+
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable Integer courseID){
+        this.categoryService.deleteCategory(courseID);
+        return new ResponseEntity<>(new ApiResponse("Category Has Beed Deleted Successfully", true),HttpStatus.OK);
     }
 
 }

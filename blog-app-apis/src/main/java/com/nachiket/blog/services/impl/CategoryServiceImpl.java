@@ -27,32 +27,32 @@ public class CategoryServiceImpl implements CategoryService {
         return this.modelMapper.map(addedCategory, CategoryDto.class);
     }
 
-//    @Override
-//    public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
-//        Category cat = this.categoryRepo.findById(categoryId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id", categoryId));
-//        cat.setCategoryTitle(categoryDto.getCategoryTitle());
-//        cat.setCategoryDescription(categoryDto.getCategoryDescription());
-//        Category updatedCat = this.categoryRepo.save(cat);
-//        return this.modelMapper.map(updatedCat, CategoryDto.class);
-//    }
+    @Override
+    public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
+        Category cat = this.categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id", categoryId));
+        cat.setCategoryTitle(categoryDto.getCategoryTitle());
+        cat.setCategoryDescription(categoryDto.getCategoryDescription());
+        Category updatedCat = this.categoryRepo.save(cat);
+        return this.modelMapper.map(updatedCat, CategoryDto.class);
+    }
 
-//    @Override
-//    public void deleteCategory(Integer categoryId) {
-//        Category cat = this.categoryRepo.findById(categoryId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id ", categoryId));
-//
-//        this.categoryRepo.delete(cat);
-//
-//    }
+    @Override
+    public void deleteCategory(Integer categoryId) {
+        Category cat = this.categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id ", categoryId));
 
-//    @Override
-//    public CategoryDto getCategory(Integer categoryId) {
-//        Category cat = this.categoryRepo.findById(categoryId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id ", categoryId));
-//
-//        return this.modelMapper.map(cat, CategoryDto.class);
-//    }
+        this.categoryRepo.delete(cat);
+
+    }
+
+    @Override
+    public CategoryDto getCategory(Integer categoryId) {
+        Category cat = this.categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "Category Id ", categoryId));
+
+        return this.modelMapper.map(cat, CategoryDto.class);
+    }
 
     @Override
     public List<CategoryDto> getAllCategory() {
