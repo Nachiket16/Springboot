@@ -51,13 +51,19 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post updatePost(PostDto postDto, Integer postId) {
-        return null;
+    public PostDto updatePost(PostDto postDto, Integer postId) {
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "Post ID", postId));
+        post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContent());
+        Post updatedPost = this.postRepo.save(post);
+        return this.modelMapper.map(updatedPost, PostDto.class);
     }
 
     @Override
     public void deletePost(Integer postId) {
-
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "Post Id", postId));
+        this.postRepo.delete(post);
+//        this.postRepo.deleteById(postId);  //Will it work or not? No-> coz it's DTO that we are getting guess
     }
 
     @Override
@@ -94,7 +100,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> searchPosts(String keyword) {
+    public List<PostDto> searchPosts(String keyword) {
         return null;
     }
 }

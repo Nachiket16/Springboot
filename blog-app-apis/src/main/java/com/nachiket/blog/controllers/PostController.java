@@ -1,6 +1,7 @@
 package com.nachiket.blog.controllers;
 
 import com.nachiket.blog.entities.Post;
+import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.CategoryDto;
 import com.nachiket.blog.payloads.PostDto;
 import com.nachiket.blog.services.PostService;
@@ -48,8 +49,23 @@ public class PostController {
     }
 
     @GetMapping("/post/{postId}")
-    public ResponseEntity<PostDto> getCategory(@Valid @PathVariable("postId") Integer postId) {
+    public ResponseEntity<PostDto> getPostById(@Valid @PathVariable("postId") Integer postId) {
         return ResponseEntity.ok(this.postService.getPostByID(postId));
+    }
+
+    //Update By ID
+    @PutMapping("/post/{postId}")
+    public ResponseEntity<PostDto> updatePostById(@Valid @RequestBody PostDto postDto,@PathVariable("postId") Integer postId){
+        return ResponseEntity.ok(this.postService.updatePost(postDto, postId));
+    }
+
+
+
+    //Delete By ID
+    @DeleteMapping("/post/{postId}")
+    public ResponseEntity<ApiResponse> deletePostById(@Valid @PathVariable Integer postId){
+        this.postService.deletePost(postId);
+        return new ResponseEntity<>(new ApiResponse("Post successfully deleted ", true),HttpStatus.OK);
     }
 
 }
