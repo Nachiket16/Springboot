@@ -20,30 +20,32 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/")
-    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto){
+    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto) {
         CategoryDto createdCatDto = this.categoryService.createCategory(categoryDto);
         return new ResponseEntity<>(createdCatDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoryDto>> getAllCategory(){
+    public ResponseEntity<List<CategoryDto>> getAllCategory() {
         return new ResponseEntity<>(this.categoryService.getAllCategory(), HttpStatus.OK);
     }
+
     @GetMapping("/{courseId}")
-    public ResponseEntity<CategoryDto> getCategory(@Valid @PathVariable("courseId") Integer courseId){
+    public ResponseEntity<CategoryDto> getCategory(@Valid @PathVariable("courseId") Integer courseId) {
         return ResponseEntity.ok(this.categoryService.getCategory(courseId));
     }
 
     @PutMapping("/{courseID}")
-    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto ,@PathVariable("courseID") Integer courseID){
-        CategoryDto catDto = this.categoryService.updateCategory(categoryDto,courseID);
+    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,
+                                                      @PathVariable("courseID") Integer courseID) {
+        CategoryDto catDto = this.categoryService.updateCategory(categoryDto, courseID);
         return ResponseEntity.ok(catDto);
     }
 
     @DeleteMapping("/{courseId}")
-    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable("courseId") Integer courseID){
+    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable("courseId") Integer courseID) {
         this.categoryService.deleteCategory(courseID);
-        return new ResponseEntity<ApiResponse>(new ApiResponse("Category Has Been Deleted Successfully", true),HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(new ApiResponse("Category Has Been Deleted Successfully", true), HttpStatus.OK);
     }
 
 }
