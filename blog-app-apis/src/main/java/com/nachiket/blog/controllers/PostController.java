@@ -22,6 +22,7 @@ public class PostController {
     //Create
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
     public ResponseEntity<PostDto> createPost(
+            @Valid
             @RequestBody PostDto postDto,
             @PathVariable Integer userId,
             @PathVariable Integer categoryId)
@@ -32,13 +33,13 @@ public class PostController {
     //Get By User
 
     @GetMapping("/user/{userId}/posts")
-    public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable Integer userId){
+    public ResponseEntity<List<PostDto>> getPostsByUser(@Valid @PathVariable Integer userId){
         List<PostDto> posts= this.postService.getPostByUser(userId);
         return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
     }
 
     @GetMapping("/category/{categoryId}/posts")
-    public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Integer categoryId){
+    public ResponseEntity<List<PostDto>> getPostsByCategory(@Valid @PathVariable Integer categoryId){
         List<PostDto> posts= this.postService.getPostByCategory(categoryId);
         return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
     }
