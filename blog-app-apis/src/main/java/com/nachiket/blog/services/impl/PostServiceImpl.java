@@ -14,12 +14,14 @@ import com.nachiket.blog.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
@@ -66,8 +68,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getPostByID(Integer postId) {
-        return null;
+    public PostDto getPostByID(Integer postId) {
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "Post ID", postId));
+
+        return this.modelMapper.map(post, PostDto.class);
     }
 
     @Override
