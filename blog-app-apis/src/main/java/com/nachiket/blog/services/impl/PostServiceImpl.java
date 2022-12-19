@@ -13,6 +13,9 @@ import com.nachiket.blog.repositories.UserRepo;
 import com.nachiket.blog.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,10 +69,20 @@ public class PostServiceImpl implements PostService {
 //        this.postRepo.deleteById(postId);  //Will it work or not? No-> coz it's DTO that we are getting guess
     }
 
+//    @Override
+//    public List<PostDto> getAllPost() {
+//        List<Post> posts = this.postRepo.findAll();
+//        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+//        return postDtos;
+//    }
+
+    //For Pagination implementing it on Get All Post Method
     @Override
-    public List<PostDto> getAllPost() {
-        List<Post> posts = this.postRepo.findAll();
-        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+    public List<PostDto> getAllPost(Integer pageNumber, Integer PageSize) {
+        PageRequest p = PageRequest.of(pageNumber, PageSize);
+        Page<Post> pagePost = this.postRepo.findAll(p);
+        List<Post> allPosts = pagePost.getContent();
+        List<PostDto> postDtos = allPosts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
         return postDtos;
     }
 

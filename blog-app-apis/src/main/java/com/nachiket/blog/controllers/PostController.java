@@ -44,9 +44,17 @@ public class PostController {
         return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
     }
 
+//    @GetMapping("/posts")
+//    public ResponseEntity<List<PostDto>> getAllPosts(){
+//        return ResponseEntity.ok(this.postService.getAllPost());
+//    }
+
+    //Get All using the Pagination method
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts(){
-        return ResponseEntity.ok(this.postService.getAllPost());
+    public ResponseEntity<List<PostDto>> getAllPosts(
+            @RequestParam(value = "pageNumber", defaultValue = "10", required = false)Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize){
+        return ResponseEntity.ok(this.postService.getAllPost(pageNumber, pageSize));
     }
 
     @GetMapping("/post/{postId}")
