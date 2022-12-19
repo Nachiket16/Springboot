@@ -59,11 +59,20 @@ public class PostController {
 //    }
 
     //Get All using pagination with added information -> Total pages, elements, last page, page No -> Helpful for UI
+//    @GetMapping("/posts")
+//    public ResponseEntity<PostResponse> getAllPosts(
+//            @RequestParam(value = "pageNumber", defaultValue = "0", required = false)Integer pageNumber,
+//            @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize){
+//        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize);
+//        return ResponseEntity.ok(postResponse);
+//    }
+
     @GetMapping("/posts")
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false)Integer pageNumber,
-            @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize){
-        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize);
+            @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize,
+            @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy){
+        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize, sortBy);
         return ResponseEntity.ok(postResponse);
     }
 

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,8 +80,10 @@ public class PostServiceImpl implements PostService {
 
     //For Pagination implementing it on Get All Post Method
     @Override
-    public PostResponse getAllPost(Integer pageNumber, Integer PageSize) {
-        PageRequest p = PageRequest.of(pageNumber, PageSize);
+    public PostResponse getAllPost(Integer pageNumber, Integer PageSize, String sortBy) {
+
+        PageRequest p = PageRequest.of(pageNumber, PageSize, Sort.by(sortBy).descending());
+
         Page<Post> pagePost = this.postRepo.findAll(p);
         List<Post> allPosts = pagePost.getContent();
         List<PostDto> postDtos = allPosts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
