@@ -3,6 +3,7 @@ package com.nachiket.blog.services;
 
 import com.nachiket.blog.entities.Post;
 import com.nachiket.blog.payloads.PostDto;
+import com.nachiket.blog.payloads.PostResponse;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface PostService {
     void deletePost(Integer postId);
 
 //    List<PostDto> getAllPost();
-    List<PostDto> getAllPost(Integer pageNumber, Integer PageSize);
+    PostResponse getAllPost(Integer pageNumber, Integer PageSize);
 
     PostDto getPostByID(Integer postId);
 

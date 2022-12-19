@@ -4,6 +4,7 @@ import com.nachiket.blog.entities.Post;
 import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.CategoryDto;
 import com.nachiket.blog.payloads.PostDto;
+import com.nachiket.blog.payloads.PostResponse;
 import com.nachiket.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,11 +51,20 @@ public class PostController {
 //    }
 
     //Get All using the Pagination method
+//    @GetMapping("/posts")
+//    public ResponseEntity<List<PostDto>> getAllPosts(
+//            @RequestParam(value = "pageNumber", defaultValue = "0", required = false)Integer pageNumber,
+//            @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize){
+//        return ResponseEntity.ok(this.postService.getAllPost(pageNumber, pageSize));
+//    }
+
+    //Get All using pagination with added information -> Total pages, elements, last page, page No -> Helpful for UI
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts(
-            @RequestParam(value = "pageNumber", defaultValue = "10", required = false)Integer pageNumber,
+    public ResponseEntity<PostResponse> getAllPosts(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false)Integer pageNumber,
             @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize){
-        return ResponseEntity.ok(this.postService.getAllPost(pageNumber, pageSize));
+        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize);
+        return ResponseEntity.ok(postResponse);
     }
 
     @GetMapping("/post/{postId}")

@@ -6,6 +6,7 @@ import com.nachiket.blog.entities.User;
 import com.nachiket.blog.exception.ResourceNotFoundException;
 import com.nachiket.blog.payloads.CategoryDto;
 import com.nachiket.blog.payloads.PostDto;
+import com.nachiket.blog.payloads.PostResponse;
 import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.repositories.CategoryRepo;
 import com.nachiket.blog.repositories.PostRepo;
@@ -78,12 +79,22 @@ public class PostServiceImpl implements PostService {
 
     //For Pagination implementing it on Get All Post Method
     @Override
-    public List<PostDto> getAllPost(Integer pageNumber, Integer PageSize) {
+    public PostResponse getAllPost(Integer pageNumber, Integer PageSize) {
         PageRequest p = PageRequest.of(pageNumber, PageSize);
         Page<Post> pagePost = this.postRepo.findAll(p);
         List<Post> allPosts = pagePost.getContent();
         List<PostDto> postDtos = allPosts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
-        return postDtos;
+
+        PostResponse postResponse = new PostResponse();
+
+        postResponse.setContent(postDtos);
+        postResponse.setPageNumber(pagePost.getNumber());
+        postResponse.setPageSize(pagePost.getSize());
+        postResponse.setTotalElements(pagePost.getTotalElements());
+        postResponse.setTotalPages(pagePost.getTotalPages());
+        postResponse.setLastPage(pagePost.isLast());
+
+        return postResponse;
     }
 
     @Override
