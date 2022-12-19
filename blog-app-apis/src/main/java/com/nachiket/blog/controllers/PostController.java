@@ -96,4 +96,13 @@ public class PostController {
         return new ResponseEntity<>(new ApiResponse("Post successfully deleted ", true),HttpStatus.OK);
     }
 
+    //Search controller Method
+    @GetMapping("/posts/search/{keywords}")
+    public ResponseEntity<List<PostDto>> searchPostByTitle(
+            @PathVariable("keywords") String keywords
+    ){
+      List<PostDto> result = this.postService.searchPosts(keywords);
+      return new ResponseEntity<List<PostDto>>(result, HttpStatus.OK);
+    }
+
 }
