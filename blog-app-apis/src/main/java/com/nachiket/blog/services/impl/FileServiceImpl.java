@@ -34,6 +34,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public InputStream getResource(String path, String fileName) throws FileNotFoundException {
-        return null;
+        String fullPath = path+fileName;
+        InputStream is = new FileInputStream(fullPath);
+        return is;
     }
 }
