@@ -80,9 +80,14 @@ public class PostServiceImpl implements PostService {
 
     //For Pagination implementing it on Get All Post Method
     @Override
-    public PostResponse getAllPost(Integer pageNumber, Integer PageSize, String sortBy) {
-
-        PageRequest p = PageRequest.of(pageNumber, PageSize, Sort.by(sortBy).descending());
+    public PostResponse getAllPost(Integer pageNumber, Integer PageSize, String sortBy, String sortDir) {
+        Sort sort = null;
+        if(sortDir.equalsIgnoreCase("asc")){
+            sort=Sort.by(sortBy).ascending();
+        }else{
+            sort=Sort.by(sortBy).descending();
+        }
+        PageRequest p = PageRequest.of(pageNumber, PageSize, sort);
 
         Page<Post> pagePost = this.postRepo.findAll(p);
         List<Post> allPosts = pagePost.getContent();

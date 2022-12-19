@@ -1,8 +1,6 @@
 package com.nachiket.blog.controllers;
 
-import com.nachiket.blog.entities.Post;
 import com.nachiket.blog.payloads.ApiResponse;
-import com.nachiket.blog.payloads.CategoryDto;
 import com.nachiket.blog.payloads.PostDto;
 import com.nachiket.blog.payloads.PostResponse;
 import com.nachiket.blog.services.PostService;
@@ -71,8 +69,9 @@ public class PostController {
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false)Integer pageNumber,
             @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize,
-            @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy){
-        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize, sortBy);
+            @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = "asc", required = false)String sortDir) {
+        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize, sortBy, sortDir);
         return ResponseEntity.ok(postResponse);
     }
 

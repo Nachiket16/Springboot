@@ -21,7 +21,7 @@ public interface PostService {
 //    PostResponse getAllPost(Integer pageNumber, Integer PageSize);
 
     //Sort By with Pagination
-    PostResponse getAllPost(Integer pageNumber, Integer PageSize, String sortBy);
+    PostResponse getAllPost(Integer pageNumber, Integer PageSize, String sortBy, String sortDir);
 
 
     PostDto getPostByID(Integer postId);
