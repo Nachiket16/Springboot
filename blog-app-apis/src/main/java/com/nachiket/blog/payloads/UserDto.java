@@ -1,10 +1,13 @@
 package com.nachiket.blog.payloads;
 
+import com.nachiket.blog.entities.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.*;
+import java.util.HashSet;
+import java.util.Set;
 
 //  Same as the ENTITY but using it for the passing/ exposing the value to the client side
 //  So that Entity will be safe as DB connection is there
@@ -23,5 +26,7 @@ public class UserDto {
     private String password;
     @NotEmpty
     private String about;
+
+//    private Set<Comment> comments = new HashSet<>();
 
 }
