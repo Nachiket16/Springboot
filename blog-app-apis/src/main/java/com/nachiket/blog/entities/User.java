@@ -28,6 +28,16 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private Set<Comment> comments = new HashSet<>();
+    //NOT YET IMPLEMENTED
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private Set<Comment> comments = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name="user_role",
+            joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="role",referencedColumnName = "id")
+            )
+    private Set<Role> roles = new HashSet<>();
+
 }
