@@ -1,12 +1,16 @@
 package com.nachiket.blog.services.impl;
 
+import com.nachiket.blog.config.AppConstants;
+import com.nachiket.blog.entities.Role;
 import com.nachiket.blog.entities.User;
 import com.nachiket.blog.exception.ResourceNotFoundException;
 import com.nachiket.blog.payloads.UserDto;
+import com.nachiket.blog.repositories.RoleRepo;
 import com.nachiket.blog.repositories.UserRepo;
 import com.nachiket.blog.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,26 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepo roleRepo;
+
+    @Override
+    public UserDto registerNewUser(UserDto userDto) {
+        User user = this.modelMapper.map(userDto, User.class);
+        //Encoded the password
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        //Roles by default it's ROLE_NORMAl
+        Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
+
+        user.getRoles().add(role);
+        User newUser = this.userRepo.save(user);
+        return this.modelMapper.map(newUser, UserDto.class);
+    }
+
     @Override
     public UserDto createUser(UserDto userDto) {
 

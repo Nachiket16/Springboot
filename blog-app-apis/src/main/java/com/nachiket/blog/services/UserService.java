@@ -5,6 +5,9 @@ import com.nachiket.blog.payloads.UserDto;
 
 import java.util.*;
 public interface UserService {
+
+    UserDto registerNewUser(UserDto user);
+
     UserDto createUser(UserDto user);
     //We are using UserDto because rather than exposing the Entity we are using the payload
 

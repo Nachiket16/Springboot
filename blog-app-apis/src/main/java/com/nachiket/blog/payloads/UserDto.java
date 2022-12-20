@@ -1,6 +1,7 @@
 package com.nachiket.blog.payloads;
 
 import com.nachiket.blog.entities.Comment;
+import com.nachiket.blog.entities.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,5 +29,5 @@ public class UserDto {
     private String about;
 
 //    private Set<Comment> comments = new HashSet<>();
-
+    private Set<RoleDto> roles = new HashSet<>();
 }

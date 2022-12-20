@@ -1,8 +1,11 @@
 package com.nachiket.blog.controllers;
 
+import com.nachiket.blog.exception.ApiException;
 import com.nachiket.blog.payloads.JwtAuthRequest;
 import com.nachiket.blog.payloads.JwtAuthResponse;
+import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.security.JwtTokenHelper;
+import com.nachiket.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,9 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> createToken(
             @RequestBody JwtAuthRequest request
@@ -52,9 +58,14 @@ public class AuthController {
                 this.authenticationManager.authenticate(authenticationToken);
             }catch (BadCredentialsException e){
                 System.out.println("Invalid Username pass Details");
-                throw new Exception("Invalid Username or Password !!!");
+                throw new ApiException("Invalid Username or Password !!!");
             }
+    }
 
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
+        UserDto registerNewUser = this.userService.registerNewUser(userDto);
+        return new ResponseEntity<UserDto>(registerNewUser, HttpStatus.CREATED);
     }
 
 }
