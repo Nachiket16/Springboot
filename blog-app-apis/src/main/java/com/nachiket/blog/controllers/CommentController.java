@@ -2,6 +2,7 @@ package com.nachiket.blog.controllers;
 
 import com.nachiket.blog.entities.Comment;
 import com.nachiket.blog.entities.Post;
+import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.CommentDto;
 import com.nachiket.blog.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,14 @@ public class CommentController {
         CommentDto comment1 = this.commentService.createComment(comment, postId);
         return new ResponseEntity<CommentDto>(comment1, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/comments/{commentId}")
+    public ResponseEntity<ApiResponse> createComment(
+            @PathVariable Long commentId
+    ){
+        this.commentService.deleteComment(commentId);
+        return new ResponseEntity<ApiResponse>(new ApiResponse("Deleted Comment Successfully ", true), HttpStatus.OK);
+    }
+
 
 }
