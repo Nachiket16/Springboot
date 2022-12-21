@@ -5,11 +5,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Date;
+
 @SpringBootApplication
 public class SpringBootAnnotationApplication implements CommandLineRunner {
 
 	@Autowired
 	private Student student;
+
+	@Autowired
+	private Date date;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootAnnotationApplication.class, args);
@@ -18,5 +23,7 @@ public class SpringBootAnnotationApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		this.student.studying();
+
+		this.date.getTime();
 	}
 }

@@ -19,6 +19,8 @@
 >This will make class as source of Bean definition.
 > SPRING CONTAINER will manage the Bean
 
+>@Bean
+> >applied on a method to specify that it returns a bean to be managed by Spring context. Spring Bean annotation is usually declared in Configuration classes methods. In this case, bean methods may reference other @Bean methods in the same class by calling them directly.
 
 
 
