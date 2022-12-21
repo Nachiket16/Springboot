@@ -6,3 +6,5 @@ port:3306
 >Create DB as blog_app_apis
 >> CREATE database blog_app_apis;
 
+#SWAGGER
+>http://localhost:9090/swagger-ui/index.html
