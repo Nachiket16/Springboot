@@ -1,6 +1,7 @@
 package com.nachiket.blog;
 
 import com.nachiket.blog.repositories.UserRepo;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,13 +18,14 @@ class BlogAppApisApplicationTests {
 	void contextLoads() {
 	}
 
-//	@Test
-//	public void repoTest(){
-//		String className = this.userRepo.getClass().getName();
-//		String pkgName = this.userRepo.getClass().getPackageName();
-//		System.out.println(className);
-//		System.out.println(pkgName);
-//	}
+	@Test
+	@Disabled
+	public void repoTest(){
+		String className = this.userRepo.getClass().getName();
+		String pkgName = this.userRepo.getClass().getPackageName();
+		System.out.println(className);
+		System.out.println(pkgName);
+	}
 
 	@Test
 	void testSum(){
@@ -36,6 +38,13 @@ class BlogAppApisApplicationTests {
 		//import static org.assertj.core.api.Assertions.*;
 		assertThat(res).isEqualTo(expectedResult);
 
+	}
+	@Test
+	void testProduct(){
+		int expectedResult = 6;
+		int res = c.doProduct(2,3);
+
+		assertThat(expectedResult).isEqualTo(res);
 	}
 
 
