@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .antMatchers("/v3/api-docs").permitAll()
                     .antMatchers(PUBLIC_URL).permitAll()
                     .antMatchers(HttpMethod.GET).permitAll()    //All Get are accessible
+                    .antMatchers(HttpMethod.POST).permitAll()   //All Post are accessible
             .anyRequest()
             .authenticated()
             .and()
