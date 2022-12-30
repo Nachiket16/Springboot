@@ -1,7 +1,20 @@
 public class BankAccount
 {
     private double balance;
+
+    public String getBankHolderName() {
+        return bankHolderName;
+    }
+
+    public void setBankHolderName(String bankHolderName) {
+        this.bankHolderName = bankHolderName;
+    }
+
     private double minimumBalance;
+    private boolean isActive = true;
+    private String bankHolderName;
+
+
 
     public BankAccount(double balance, double minimumBalance){
         this.balance = balance;
@@ -37,4 +50,11 @@ public class BankAccount
         return balance += amount;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
