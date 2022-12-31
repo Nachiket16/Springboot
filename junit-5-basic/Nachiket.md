@@ -1,5 +1,5 @@
 # Condition Execution
->@EnabledOnOs(OS.LINUX)
+> @EnabledOnOs(OS.LINUX)
 > 
 > @EnabledOnJre(JRE.JAVA_11)
 > 
@@ -15,7 +15,7 @@
 > >same structure as assert.
 > 
 > eg: assumeTrue(value)
-
+>
 
 # Assert
 
@@ -26,15 +26,15 @@
 > * assertThrow()
 
 ### assertAll()
-@Test   
-@DisplayName("Multiply method test")   
-void testMultiply(){   
-assertAll(   
-() -> assertEquals(4, mathUtils.multiply(2,2)),  
-() -> assertEquals(0, mathUtils.multiply(0, 123)),  
-() -> assertEquals(-1, mathUtils.multiply(-1, 1))  
-);  
-}
+>@Test   
+>@DisplayName("Multiply method test")   
+>void testMultiply(){   
+>assertAll(   
+>() -> assertEquals(4, mathUtils.multiply(2,2)),  
+>() -> assertEquals(0, mathUtils.multiply(0, 123)),  
+>() -> assertEquals(-1, mathUtils.multiply(-1, 1))  
+>);  
+>}
 
 ### @Nested
 It's used for nesting multiple test 
