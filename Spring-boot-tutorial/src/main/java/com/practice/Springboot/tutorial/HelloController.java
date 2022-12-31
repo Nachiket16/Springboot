@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String HelloWorld(){
-        return "Welcome in practice session";
+        return "Welcome in practice session !!!";
+
     }
 }
