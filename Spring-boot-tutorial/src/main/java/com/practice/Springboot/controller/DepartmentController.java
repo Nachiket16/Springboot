@@ -3,10 +3,7 @@ package com.practice.Springboot.controller;
 import com.practice.Springboot.entitiy.Department;
 import com.practice.Springboot.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,11 @@ public class DepartmentController {
     @GetMapping("/departments")
     public List<Department> fetchDepartmentList(){
          return this.departmentService.getAllDepartments();
+    }
+
+    @GetMapping("/department/{departmentId}")
+    public Department fetchDepartmentById(@PathVariable Long departmentId){
+        return this.departmentService.getDepartmentById(departmentId);
     }
 
 }
