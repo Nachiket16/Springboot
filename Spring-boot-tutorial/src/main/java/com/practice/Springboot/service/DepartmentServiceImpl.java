@@ -5,6 +5,8 @@ import com.practice.Springboot.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
 
@@ -15,5 +17,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 
         Department savedDepartment = this.departmentRepository.save(department);
         return savedDepartment;
+    }
+
+    @Override
+    public List<Department> getAllDepartments() {
+        List<Department> list = this.departmentRepository.findAll();
+        return list;
     }
 }
