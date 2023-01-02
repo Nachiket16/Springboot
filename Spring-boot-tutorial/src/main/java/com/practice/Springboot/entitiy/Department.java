@@ -7,14 +7,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder    //Builder pattern-> want to use different set of prop u can create object
+//Either u have to use different construction so better go with builder
 public class Department {
 
 
