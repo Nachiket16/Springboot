@@ -1,5 +1,6 @@
 package com.nachiketjpa.jpa.repository;
 
+import com.nachiketjpa.jpa.entity.Guardian;
 import com.nachiketjpa.jpa.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,30 @@ class StudentRepositoryTest {
                 .emailId("nachiket@gmail.com")
                 .firstName("Nachiket")
                 .lastName("Khule")
-                .guardianName("Madhusudan")
-                .guardianEmail("madhu@yahoo.in")
-                .guardianMobile("12312312312")
+//                .guardianName("Madhusudan")
+//                .guardianEmail("madhu@yahoo.in")
+//                .guardianMobile("12312312312")
                 .build();
+        studentRepository.save(student);
+    }
+
+    @Test
+    public void saveStudentWithGuardian(){
+
+        Guardian guardian = Guardian
+                .builder()
+                .name("Madhusudan")
+                .email("madhu@yahoo.in")
+                .mobile("12312312312")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("Shiva")
+                .emailId("shiva@kailash.com")
+                .lastName("lord")
+                .guardian(guardian)
+                .build();
+
         studentRepository.save(student);
     }
 
@@ -34,4 +55,19 @@ class StudentRepositoryTest {
         List<Student> studentList = studentRepository.findAll();
         System.out.println("StudentList = " + studentList);
     }
+    
+    @Test
+    public void printStudentByFirstName(){
+        List<Student> students = 
+                studentRepository.findByFirstName("shiva");
+        System.out.println("students = " + students);
+    }
+    @Test
+        public void printStudentByFirstNameContaining(){
+            List<Student> students =
+                    studentRepository.findByFirstNameContaining("a");
+            System.out.println("students = " + students);
+        }
+
+
 }
