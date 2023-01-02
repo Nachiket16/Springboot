@@ -1,8 +1,6 @@
 package com.practice.Springboot.service;
 
 import com.practice.Springboot.entitiy.Department;
-import com.practice.Springboot.repository.DepartmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -13,4 +11,10 @@ public interface DepartmentService {
     List<Department> getAllDepartments();
 
     Department getDepartmentById(Long id);
+
+    void deleteByDepartmentId(Long id);
+
+    Department updateDepartmentById(Long id ,Department department);
+
+    Department fetchDepartmentByName(String departmentName);
 }
