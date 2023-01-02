@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Entity
@@ -14,6 +15,7 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long departmentId;
+    @NotNull(message = "Please add the department Name")
     private String departmentName;
     private String departmentAddress;
 
