@@ -20,4 +20,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     // Use ? for the JPQL if you are taking input from the user side
     @Query("select s from Student s where s.emailId = ?1")
     Student getStudentByEmailAddress(String EmailId);
+    @Query("select s.firstName from Student s where s.emailId = ?1")
+    String getStudentFirstNameByEmailAddress(String EmailId);
+
 }
