@@ -47,7 +47,9 @@ public class Course {
     )
     private Teacher teacher;
 
-    @ManyToMany
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
     @JoinTable(
             name = "student_course_map",
             joinColumns = @JoinColumn(

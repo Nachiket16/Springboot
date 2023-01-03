@@ -1,6 +1,8 @@
 package com.nachiketjpa.jpa.repository;
 
 import com.nachiketjpa.jpa.entity.Course;
+import com.nachiketjpa.jpa.entity.Guardian;
+import com.nachiketjpa.jpa.entity.Student;
 import com.nachiketjpa.jpa.entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +103,40 @@ class CourseRepositoryTest {
         System.out.println("courses = " + courses);
     }
 
-    
+    @Test
+    public void saveCourseWithStudentAndTeacher(){
+        Teacher teacher =
+                Teacher.builder()
+                        .firstName("Elon")
+                        .lastName("Musk")
+                        .build();
+
+        Guardian guardian =
+                Guardian.builder()
+                        .name("SharmaJi")
+                        .email("sharmajika@ladka.com")
+                        .mobile("9999999999")
+                        .build();
+
+        Student student =
+                Student.builder()
+                        .firstName("Parag")
+                        .lastName("Patole")
+                        .emailId("parag@tesla.com")
+                        .guardian(guardian)
+                        .build();
+
+        Course course =
+                Course.builder()
+                        .title("AI")
+                        .credit(10)
+                        .teacher(teacher)
+                        .build();
+
+        course.addStudents(student);
+
+        courseRepository.save(course);
+
+    }
 
 }
