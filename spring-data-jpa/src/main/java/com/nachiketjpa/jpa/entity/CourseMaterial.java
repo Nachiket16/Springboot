@@ -1,10 +1,7 @@
 package com.nachiketjpa.jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Entity
@@ -12,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "course")       //As we are fetching lazy we don't need the course to be printed
 public class CourseMaterial {
 
     @Id
@@ -28,9 +26,11 @@ public class CourseMaterial {
     private String url;
 
     @OneToOne(
-            cascade = CascadeType.ALL   //This will avoid unsaved transient instances
-            //eg-> if we want to save course material without saving course this error will shown
+            cascade = CascadeType.ALL,   //This will avoid unsaved transient instances
+            //eg-> if we want to save course material without saving course this error will be shown
             //to avoid this we will use Cascade
+
+            fetch = FetchType.LAZY  //Only going to print the data of course material not the course
     )
     @JoinColumn(
             name = "course_Id", //Name inside the DB table
