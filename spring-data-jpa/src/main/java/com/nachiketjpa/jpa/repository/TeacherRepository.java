@@ -1,9 +1,9 @@
 package com.nachiketjpa.jpa.repository;
 
-import com.nachiketjpa.jpa.entity.CourseMaterial;
+import com.nachiketjpa.jpa.entity.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CourseMaterialRepository extends JpaRepository<CourseMaterial, Long> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 }
