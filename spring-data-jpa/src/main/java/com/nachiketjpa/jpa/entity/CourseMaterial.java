@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 public class CourseMaterial {
 
     @Id
@@ -26,7 +27,11 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String url;
 
-    @OneToOne
+    @OneToOne(
+            cascade = CascadeType.ALL   //This will avoid unsaved transient instances
+            //eg-> if we want to save course material without saving course this error will shown
+            //to avoid this we will use Cascade
+    )
     @JoinColumn(
             name = "course_Id", //Name inside the DB table
             referencedColumnName = "courseId"   //referring to Course
