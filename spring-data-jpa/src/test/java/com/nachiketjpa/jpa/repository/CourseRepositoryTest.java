@@ -91,4 +91,16 @@ class CourseRepositoryTest {
         System.out.println("courses = " + courses);
     }
 
+    @Test
+    public void printFindByContaining(){
+        Pageable firstPageTenRecord =
+                PageRequest.of(0,10);
+
+        List<Course> courses =
+                courseRepository.findByTitleContaining("z", firstPageTenRecord ).getContent();
+        System.out.println("courses = " + courses);
+    }
+
+    
+
 }
