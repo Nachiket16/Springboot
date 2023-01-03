@@ -30,7 +30,11 @@ public class CourseMaterial {
             //eg-> if we want to save course material without saving course this error will be shown
             //to avoid this we will use Cascade
 
-            fetch = FetchType.LAZY  //Only going to print the data of course material not the course
+            fetch = FetchType.LAZY,  //Only going to print the data of course material not the course
+
+            optional = false    //This will create the mandatory requirement for the other entity.
+            //Which means it's compulsory to add courseMaterial while saving any relational table;
+            //By default it's true
     )
     @JoinColumn(
             name = "course_Id", //Name inside the DB table
