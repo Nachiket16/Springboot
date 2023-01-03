@@ -29,13 +29,13 @@ public class Teacher {
     private String firstName;
     private String lastName;
 
-    @OneToMany(
+   /* @OneToMany(
             cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "teacher_id",                //This is the column name
             referencedColumnName = "teacherId"
     )
-    private List<Course> courses;
+    private List<Course> courses;*/
 
 }

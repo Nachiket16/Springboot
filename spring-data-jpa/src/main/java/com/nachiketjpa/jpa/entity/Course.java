@@ -33,4 +33,15 @@ public class Course {
             // So we are using mappedBy which give the location were reference is used
     )
     private CourseMaterial courseMaterial;
+
+
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacherId"
+    )
+    private Teacher teacher;
+
 }

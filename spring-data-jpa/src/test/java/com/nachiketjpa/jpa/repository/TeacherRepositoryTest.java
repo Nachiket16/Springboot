@@ -33,13 +33,20 @@ class TeacherRepositoryTest {
                         .credit(10)
                         .title("Data Structure in depth")
                         .build();
+        Course courseLinux =
+                Course
+                        .builder()
+                        .title("Linux")
+                        .credit(10)
+                        .title("Linux in depth")
+                        .build();
 
         Teacher teacher =
                 Teacher
                         .builder()
                         .firstName("Durgesh")
                         .lastName("Gupta")
-                        .courses(List.of(courseSpring,courseDsa))
+//                        .courses(List.of(courseLinux))
                         .build();
 
         teacherRepository.save(teacher);
