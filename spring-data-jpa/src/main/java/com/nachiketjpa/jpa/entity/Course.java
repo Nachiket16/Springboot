@@ -26,4 +26,11 @@ public class Course {
     private Long courseId;
     private String title;
     private Integer credit;
+
+    @OneToOne(
+            mappedBy = "course"
+            //As course material is mapped and already define as reference
+            // So we are using mappedBy which give the location were reference is used
+    )
+    private CourseMaterial courseMaterial;
 }
