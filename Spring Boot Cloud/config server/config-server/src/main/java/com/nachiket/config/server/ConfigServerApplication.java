@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConfigServerApplication {
 
-	@RequestMapping("/")
-	public String home() {
-		return "Hello World!";
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigServerApplication.class, args);
 	}
