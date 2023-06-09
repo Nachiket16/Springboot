@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e5de69-64cf-49ff-8258-8ca154c30e12" name="Changes" comment="" />
+    <list default="true" id="91e5de69-64cf-49ff-8258-8ca154c30e12" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config server/config-server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/src/main/java/com/nachiket/config/clientfirst/GreetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/src/main/java/com/nachiket/config/clientfirst/GreetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config client-first/config-client-first/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config server/config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config server/config-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring Boot Cloud/config server/config-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Spring Boot Cloud/config server/config-server/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +50,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/mintifi/Nachiket/GITHUB/Springboot/spring-data-jpa"
   }
 }]]></component>
