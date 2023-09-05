@@ -3,10 +3,8 @@ package com.nachiket.blog.config;
 import com.nachiket.blog.security.CustomUserDetailService;
 import com.nachiket.blog.security.JwtAuthenticationEntryPoint;
 import com.nachiket.blog.security.JwtAuthenticationFilter;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,9 +19,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.Arrays;
 
 @Configuration      //Used to declare bean
 @EnableWebSecurity
@@ -53,9 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
             http
             .csrf().disable()
+                    .cors().configurationSource(coresFilter())
+                    .and()
             .authorizeHttpRequests()
-//                    .antMatchers("/api/auth/**").permitAll()  //make this url public
-//                    .antMatchers("/v3/api-docs").permitAll()
+                    .antMatchers("/api/auth/**").permitAll()  //make this url public
+                    .antMatchers("/v3/api-docs").permitAll()
+                    .antMatchers("/v3/api-docs").permitAll()
+                    .antMatchers("/v1/auth/**' ").permitAll()
                     .antMatchers(PUBLIC_URL).permitAll()
                     .antMatchers(HttpMethod.GET).permitAll()    //All Get are accessible
                     .antMatchers(HttpMethod.POST).permitAll()   //All Post are accessible
@@ -67,7 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);//JWT work on stateless
-
             http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
@@ -90,8 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean coresFilter(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    public CorsConfigurationSource coresFilter(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.addAllowedOriginPattern("*");
@@ -104,9 +106,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedMethod("PUT");
         configuration.addAllowedMethod("OPTIONS");
         configuration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration );
-        FilterRegistrationBean bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        return bean;
+        return source;
     }
 
 
