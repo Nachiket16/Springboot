@@ -30,22 +30,22 @@ public class CategoryController {
         return new ResponseEntity<>(this.categoryService.getAllCategory(), HttpStatus.OK);
     }
 
-    @GetMapping("/{courseId}")
-    public ResponseEntity<CategoryDto> getCategory(@Valid @PathVariable("courseId") Integer courseId) {
-        return ResponseEntity.ok(this.categoryService.getCategory(courseId));
+    @GetMapping("/{categoryId}")
+    public ResponseEntity<CategoryDto> getCategory(@Valid @PathVariable("categoryId") Integer categoryId) {
+        return ResponseEntity.ok(this.categoryService.getCategory(categoryId));
     }
 
 
-    @PutMapping("/{courseID}")
+    @PutMapping("/{categoryId}")
     public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,
-                                                      @PathVariable("courseID") Integer courseID) {
-        CategoryDto catDto = this.categoryService.updateCategory(categoryDto, courseID);
+                                                      @PathVariable("categoryId") Integer categoryId) {
+        CategoryDto catDto = this.categoryService.updateCategory(categoryDto, categoryId);
         return ResponseEntity.ok(catDto);
     }
 
-    @DeleteMapping("/{courseId}")
-    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable("courseId") Integer courseID) {
-        this.categoryService.deleteCategory(courseID);
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<ApiResponse> deleteCategory(@Valid @PathVariable("categoryId") Integer categoryId) {
+        this.categoryService.deleteCategory(categoryId);
         return new ResponseEntity<ApiResponse>(new ApiResponse("Category Has Been Deleted Successfully", true), HttpStatus.OK);
     }
 
