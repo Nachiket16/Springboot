@@ -1,13 +1,14 @@
 package com.nachiket.blog.payloads;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nachiket.blog.entities.Comment;
-import com.nachiket.blog.entities.Role;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,5 +37,10 @@ public class UserDto {
     @JsonIgnore
     public String getPassword(){
         return this.getPassword();
+    }
+
+    @JsonProperty
+    public void setPassword(String password){
+        this.password = password;
     }
 }

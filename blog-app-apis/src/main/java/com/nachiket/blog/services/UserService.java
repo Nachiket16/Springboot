@@ -1,9 +1,8 @@
 package com.nachiket.blog.services;
 
-import com.nachiket.blog.entities.User;
 import com.nachiket.blog.payloads.UserDto;
 
-import java.util.*;
+import java.util.List;
 public interface UserService {
 
     UserDto registerNewUser(UserDto user);

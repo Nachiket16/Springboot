@@ -1,9 +1,10 @@
 package com.nachiket.blog.payloads;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter

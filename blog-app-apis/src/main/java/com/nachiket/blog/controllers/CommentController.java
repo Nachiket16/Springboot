@@ -1,18 +1,15 @@
 package com.nachiket.blog.controllers;
 
-import com.nachiket.blog.entities.Comment;
-import com.nachiket.blog.entities.Post;
 import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.CommentDto;
 import com.nachiket.blog.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 public class CommentController {
 
     @Autowired

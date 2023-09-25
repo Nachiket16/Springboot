@@ -1,19 +1,12 @@
 package com.nachiket.blog.payloads;
 
-import com.nachiket.blog.entities.Category;
-import com.nachiket.blog.entities.Comment;
-import com.nachiket.blog.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Getter
