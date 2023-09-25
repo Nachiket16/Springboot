@@ -1,11 +1,13 @@
 package com.nachiket.blog.controllers;
 
+import com.nachiket.blog.entities.User;
 import com.nachiket.blog.exception.ApiException;
 import com.nachiket.blog.payloads.JwtAuthRequest;
 import com.nachiket.blog.payloads.JwtAuthResponse;
 import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.security.JwtTokenHelper;
 import com.nachiket.blog.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth/")
 public class AuthController {
-
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private JwtTokenHelper jwtTokenHelper;
 
@@ -45,6 +48,7 @@ public class AuthController {
 
         JwtAuthResponse response = new JwtAuthResponse();
         response.setToken(token);
+        response.setUser(this.modelMapper.map((User)userDetails,UserDto.class));
         return new ResponseEntity<JwtAuthResponse>(response, HttpStatus.OK);
 
     }

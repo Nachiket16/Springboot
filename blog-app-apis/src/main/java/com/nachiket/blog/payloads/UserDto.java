@@ -1,5 +1,6 @@
 package com.nachiket.blog.payloads;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nachiket.blog.entities.Comment;
 import com.nachiket.blog.entities.Role;
 import lombok.Getter;
@@ -20,14 +21,20 @@ public class UserDto {
     @NotEmpty
     @Size(min = 3, message = "Username must be of 3 character")
     private String name;
+    @NotEmpty
     @Email(message = "Email address is not valid !!")
     private String email;
     @NotEmpty
     @Size(min = 3, max = 10, message = "Password must be size of 3 chars to max of 10 chars")
     private String password;
-    @NotEmpty
+    @NotEmpty(message = "About must not be empty !!!")
     private String about;
 
 //    private Set<Comment> comments = new HashSet<>();
     private Set<RoleDto> roles = new HashSet<>();
+
+    @JsonIgnore
+    public String getPassword(){
+        return this.getPassword();
+    }
 }

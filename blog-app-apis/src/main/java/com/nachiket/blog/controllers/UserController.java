@@ -1,6 +1,5 @@
 package com.nachiket.blog.controllers;
 
-import com.nachiket.blog.entities.User;
 import com.nachiket.blog.payloads.ApiResponse;
 import com.nachiket.blog.payloads.UserDto;
 import com.nachiket.blog.services.UserService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -23,14 +21,14 @@ public class UserController {
 
     //Post - For creation
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto){
         UserDto createUserDto = this.userService.createUser(userDto);
         return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
     }
 
     //Put - Update
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer userId){
+    public ResponseEntity<UserDto> updateUser(@RequestBody @Valid UserDto userDto, @PathVariable("userId") Integer userId){
         UserDto updatedUser = this.userService.updateUser(userDto, userId);
         return ResponseEntity.ok(updatedUser);
     }
