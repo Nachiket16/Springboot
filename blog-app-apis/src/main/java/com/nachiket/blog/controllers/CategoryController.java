@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/category")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;

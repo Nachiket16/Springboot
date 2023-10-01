@@ -5,6 +5,7 @@ import com.nachiket.blog.security.JwtAuthenticationEntryPoint;
 import com.nachiket.blog.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration      //Used to declare bean
@@ -47,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http
@@ -90,24 +93,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    @Bean
+//    public CorsConfigurationSource coresFilter(){
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowCredentials(true);
+//        configuration.addAllowedOriginPattern("*");
+//        configuration.addAllowedHeader("Authorization");
+//        configuration.addAllowedHeader("Content-Type");
+//        configuration.addAllowedHeader("Accept");
+//        configuration.addAllowedMethod("POST");
+//        configuration.addAllowedMethod("GET");
+//        configuration.addAllowedMethod("DELETE");
+//        configuration.addAllowedMethod("PUT");
+//        configuration.addAllowedMethod("OPTIONS");
+//        configuration.setMaxAge(3600L);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**",configuration );
+//        return source;
+//    }
     @Bean
-    public CorsConfigurationSource coresFilter(){
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.addAllowedOriginPattern("*");
-        configuration.addAllowedHeader("Authorization");
-        configuration.addAllowedHeader("Content-Type");
-        configuration.addAllowedHeader("Accept");
-        configuration.addAllowedMethod("POST");
-        configuration.addAllowedMethod("GET");
-        configuration.addAllowedMethod("DELETE");
-        configuration.addAllowedMethod("PUT");
-        configuration.addAllowedMethod("OPTIONS");
-        configuration.setMaxAge(3600L);
+    public FilterRegistrationBean coresFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",configuration );
-        return source;
+
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedHeader("Authorization");
+        corsConfiguration.addAllowedHeader("Content-Type");
+        corsConfiguration.addAllowedHeader("Accept");
+        corsConfiguration.addAllowedMethod("POST");
+        corsConfiguration.addAllowedMethod("GET");
+        corsConfiguration.addAllowedMethod("DELETE");
+        corsConfiguration.addAllowedMethod("PUT");
+        corsConfiguration.addAllowedMethod("OPTIONS");
+        corsConfiguration.setMaxAge(3600L);
+
+        source.registerCorsConfiguration("/**", corsConfiguration);
+
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+
+        bean.setOrder(-110);
+
+        return bean;
     }
+
 
 
 }
