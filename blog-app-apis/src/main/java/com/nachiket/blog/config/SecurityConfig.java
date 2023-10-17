@@ -3,6 +3,7 @@ package com.nachiket.blog.config;
 import com.nachiket.blog.security.CustomUserDetailService;
 import com.nachiket.blog.security.JwtAuthenticationEntryPoint;
 import com.nachiket.blog.security.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -25,8 +26,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.util.Arrays;
+
 @Configuration      //Used to declare bean
 @EnableWebSecurity
+@RequiredArgsConstructor
 @EnableWebMvc
 @EnableGlobalMethodSecurity(prePostEnabled = true) //For customized api authentication
 @ConfigurationProperties("application")
@@ -54,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
             http
             .csrf().disable()
-                    .cors().configurationSource(coresFilter())
+                    .cors().configurationSource(corsConfigurationSource())
                     .and()
             .authorizeHttpRequests()
                     .antMatchers("/api/auth/**").permitAll()  //make this url public
@@ -135,6 +139,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         bean.setOrder(-110);
 
         return bean;
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080",
+                "http://localhost:9090"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+        configuration
+                .setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "responseType", "Authorization", "mode"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 
